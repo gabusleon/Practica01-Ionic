@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Contact
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <ion-col>
+            <ion-searchbar (ionInput)="busqueda()" [(ngModel)]="cadenaBusqueda"></ion-searchbar> 
+        </ion-col>
+        <ion-col col-1>
+            <ion-icon name="male"></ion-icon>
+            <ion-toggle [(ngModel)]="verMasculinos"></ion-toggle>
+        </ion-col>
+        <ion-col col-1>
+            <ion-icon name="female"></ion-icon>
+            <ion-toggle [(ngModel)]="verFemeninos"></ion-toggle>
+        </ion-col>
+    </ion-row>
+<ion-list>
+  <ion-item *ngFor="let item of items">
+    {{ item }}
+  </ion-item>
+</ion-list>
+    
+  <ion-list>
+    <ion-item-sliding *ngFor="let dato of datos">
+        <ion-item *ngIf="dato.visible && (dato.gender == 'Male' && verMasculinos) || (dato.gender == 'Female' && verFemeninos)">
+
+            <ion-row>
+                <ion-col col-1>
+                    <ion-avatar item-start>
+                        <img src="{{dato.avatar}}">
+                    </ion-avatar>
+                </ion-col>            
+                <ion-col col-1>{{dato.id}}  </ion-col>
+                <ion-col>{{dato.first_name}} {{dato.last_name}}</ion-col>
+                <ion-col>{{dato.email}}</ion-col>
+            </ion-row>
+
+        </ion-item>
+        <ion-item-options side="left">            
+            <ion-icon class="genero" name="male" *ngIf="dato.gender == 'Male'"></ion-icon>
+            <ion-icon class="genero" name="female" *ngIf="dato.gender == 'Female'"></ion-icon>
+                               
+        </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+</ion-content>
